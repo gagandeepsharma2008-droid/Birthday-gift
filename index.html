@@ -1,0 +1,270 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday 🎂</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3, #8e2de2);
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            padding: 35px 25px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            color: white;
+            animation: appear 1s ease;
+            z-index: 2;
+        }
+
+        .cake {
+            font-size: 75px;
+            animation: bounce 1.5s infinite;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 10vw, 4rem);
+            margin: 15px 0;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        h2 {
+            font-size: clamp(1.2rem, 5vw, 1.8rem);
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        button {
+            border: none;
+            padding: 14px 25px;
+            border-radius: 30px;
+            background: white;
+            color: #8e2de2;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: scale(1.08);
+        }
+
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            font-size: 25px;
+            animation: floatUp 5s linear infinite;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 15px;
+            top: -20px;
+            z-index: 10;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-110vh);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .cake {
+                font-size: 60px;
+            }
+
+            p {
+                font-size: 0.95rem;
+            }
+
+            button {
+                width: 100%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="cake">🎂</div>
+
+        <h1>Happy Birthday!</h1>
+
+        <h2>🎉 Wishing You An Amazing Day! 🎉</h2>
+
+        <p>
+            May your birthday be filled with happiness, laughter,
+            beautiful memories and lots of wonderful surprises! ❤️
+            <br><br>
+            Have an absolutely fantastic year ahead! 🥳
+        </p>
+
+        <button onclick="celebrate()">
+            🎊 Celebrate Again
+        </button>
+
+    </div>
+
+    <script>
+
+        function createConfetti() {
+
+            const colors = [
+                "#ff3838",
+                "#ffdd00",
+                "#00e676",
+                "#00b0ff",
+                "#e040fb",
+                "#ff9100"
+            ];
+
+            for (let i = 0; i < 120; i++) {
+
+                const confetti = document.createElement("div");
+
+                confetti.classList.add("confetti");
+
+                confetti.style.left =
+                    Math.random() * 100 + "vw";
+
+                confetti.style.backgroundColor =
+                    colors[Math.floor(Math.random() * colors.length)];
+
+                confetti.style.animationDuration =
+                    (Math.random() * 3 + 2) + "s";
+
+                confetti.style.animationDelay =
+                    Math.random() * 1.5 + "s";
+
+                confetti.style.transform =
+                    `rotate(${Math.random() * 360}deg)`;
+
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 6000);
+            }
+        }
+
+        function createHearts() {
+
+            for (let i = 0; i < 15; i++) {
+
+                const heart = document.createElement("div");
+
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+
+                heart.style.left =
+                    Math.random() * 100 + "vw";
+
+                heart.style.animationDuration =
+                    (Math.random() * 3 + 4) + "s";
+
+                heart.style.animationDelay =
+                    Math.random() * 3 + "s";
+
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 8000);
+            }
+        }
+
+        function celebrate() {
+            createConfetti();
+            createHearts();
+        }
+
+        // Start celebration automatically
+        window.onload = function () {
+            celebrate();
+        };
+
+    </script>
+
+</body>
+</html>
+```
+
+ 
